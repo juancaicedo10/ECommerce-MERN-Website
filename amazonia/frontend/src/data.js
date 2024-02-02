@@ -1,7 +1,7 @@
-import nikeShirt from './images/p1.jpg';
-import adidasShirt from './images/p2.jpg';
-import adidasPants from './images/p3.jpg';
-import adidasFitPants from './images/p4.jpg'
+import nikeShirt from './images/p1.png';
+import adidasShirt from './images/p2.png';
+import adidasPants from './images/p3.png';
+import adidasFitPants from './images/p4.png'
 
 export const data = {
     products: [
