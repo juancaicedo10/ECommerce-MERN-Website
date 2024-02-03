@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import HomeScreen from './pages/HomeScreen.jsx';
 import ProductScreen from './pages/productScreen.jsx';
 
-
 function App() {
   return (
     <Router>
