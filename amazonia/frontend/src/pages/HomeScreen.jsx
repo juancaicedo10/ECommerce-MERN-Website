@@ -1,8 +1,13 @@
-import React, {useEffect, useReducer, useState} from 'react';
+import React, { useEffect, useReducer } from 'react';
 // import { data } from '../data';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-import logger from 'use-reducer-logger'
+import logger from 'use-reducer-logger';
+import Row from 'react-bootstrap/row';
+import Product from '../components/Product';
+import Col from 'react-bootstrap/col';
+import { Helmet } from 'react-helmet-async';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 
 const reducer = (state, action) => {
   switch(action.type) {
@@ -40,29 +45,25 @@ function HomeScreen() {
 
   return (
     <div>
+      <Helmet>
+        <title>Amazona</title>
+      </Helmet>
         <h1>Featured Products</h1>
       <div className='products'>
         {
           loading ? (
-          <div>Loading...</div>
+          <LoadingBox />
           ): error ? (
-          <div>{error}</div>
+          <MessageBox variant='danger'>{error}</MessageBox>
             )  : (
-          products.map(product => (
-            <div key={product.slug} className='product'>
-              <Link to={`/product/${product.slug}`} >
-              <img src={product.image} alt={product.name} />
-              </Link>
-              <div className='product-info'>
-                <Link to={`/product/${product.slug}`}>
-                  <p>{product.name}</p>
-                </Link>
-                <p><strong>${product.price}</strong></p>
-              <button>Add to cart</button>
-              </div>
-            </div>
-          )))
-        }
+          <Row>  
+            {products.map(product => (
+              <Col key={product.slug} sm={6} md={4} lg={3} className='mb-3'>
+                <Product product={product} />
+              </Col>
+            ))}
+          </Row>  
+            )}
       </div>
     </div>
   )

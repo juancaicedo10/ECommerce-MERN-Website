@@ -4,29 +4,29 @@
     box-sizing: border-box;
 }
 
-header {
-    width: 100vw;
-    height: 7vh;
-    background-color: #404040;
-    color:white;
-}
-
-header a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 40px;
-    font-family: sans-serif;
+.side-container {
+    min-height: 100vh;
 }
 
 main {
-    padding: 1rem;
+    flex: 1;
+}
+
+.btn-primary {
+    background-color: #ffc000 !important;
+    border-color: black !important;
+    color: black !important;
 }
 
 .products {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+}
+
+.rating span {
+    color: #ffc000;
 }
 
 .product {
@@ -41,4 +41,12 @@ main {
 
 .product-info {
     padding: 1rem;
+}
+
+.img-large {
+    width: 100%;
+}
+
+.img-thumbnail {
+    height: 80px !important;
 }
