@@ -34,7 +34,7 @@ const data = {
         rating: 4,
         numReviews: 13,
         description: "high quality pant",
-        countInStock: 5
+        countInStock: 6
       },
       {
         _id: '4',

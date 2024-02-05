@@ -1,7 +1,17 @@
 const express = require('express');
 const cors = require('cors');
 const data = require('./data.js')
-const app = express()
+const app = express();
+const mongoose = require('mongoose');
+const dotenv = require('dotenv')
+
+dotenv.config()
+
+mongoose.connect(process.env.MONGODB_URI).then(() => {
+    console.log("contected to db")
+}).catch((err) => {
+    console.log(err.message)
+})
 
 app.use(cors())
 
