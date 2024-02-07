@@ -1,8 +1,7 @@
-POST http://localhost:5000/api/users/signup
+POST http://localhost:5000/api/users/signin
 Content-Type: 'application/json'
 
 {
     "email": "admin@example.com",
     "password": "123456"
-
 }

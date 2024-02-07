@@ -9,6 +9,8 @@ const userRouter = require('./routes/userRoutes.js');
 
 dotenv.config();
 
+MONGODB_URI = 'mongodb://localhost:27017'
+
 mongoose.connect(process.env.MONGODB_URI).then(() => {
     console.log("connected to db");
 }).catch((err) => {
@@ -18,16 +20,29 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
 const app = express();
 
 // Middleware para el análisis de JSON y datos de formulario
+
 app.use((req, res, next) => {
-    let data = '';
-    req.on('data', chunk => {
-      data += chunk;
-    });
-    req.on('end', () => {
-      req.body = JSON.parse(data);
+  if (req.method === 'POST' || req.method === 'PUT') {
+      let data = '';
+      
+      req.on('data', chunk => {
+          data += chunk;
+      });
+
+      req.on('end', () => {
+          try {
+              // Parsear los datos del cuerpo de la solicitud manualmente
+              req.body = JSON.parse(data);
+              next();
+          } catch (error) {
+              console.error("Error parsing request body:", error);
+              res.status(400).send("Error en el formato de los datos de la solicitud.");
+          }
+      });
+  } else {
       next();
-    });
-  });
+  }
+});
 
 // Middleware de CORS
 app.use(cors());
