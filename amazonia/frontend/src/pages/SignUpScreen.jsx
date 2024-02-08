@@ -9,38 +9,39 @@ import { Store } from '../Store';
 import { toast } from 'react-toastify'
 import { getError } from "../utils";
 
-export default function SigninScreen() {
+export default function SignUpScreen() {
     const navigate = useNavigate()
     const { search } = useLocation();
     const redirectInUrl = new URLSearchParams(search).get('redirect')
     const redirect = redirectInUrl ? redirectInUrl : '/';
 
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
 
     const { state, dispatch: ctxDispatch } = useContext(Store)
     const { userInfo } = state;
     
     const submitHandler = async (e) => {
         e.preventDefault();
-    
-        try {
-            const { data } = await axios.post('http://localhost:5000/api/users/signin', {
+
+        console.log(name, email, password)
+    try {
+            const { data } = await axios.post('http://localhost:5000/api/users/signup', {
+                name,
                 email,
                 password
             });
-            ctxDispatch({type: 'USER_SIGNIN', payload: data});
+
+            ctxDispatch({ type: 'USER_SIGNIN', payload: data })
             localStorage.setItem('userinfo', JSON.stringify(data));
-            navigate('/shipping');
-        } catch (err) {
-            if (err.response && err.response.status === 401) {
-                toast.error(getError(err))
-            } else {
-                console.log(err);
-                alert("An error occurred while processing your request");
-            }
+            navigate('/');
+        }catch (err){
+            console.log(err)
+            toast.error(getError(err))
         }
-    }
+}
     
     useEffect(() => {
         if (userInfo) {
@@ -50,10 +51,14 @@ export default function SigninScreen() {
     return (
         <Container className="small-container">
             <Helmet>
-                <title>Sign In</title>
+                <title>Sign Up</title>
             </Helmet>
             <h1 className="my-3">Sign In</h1>
             <Form onSubmit={submitHandler}>
+            <Form.Group className='mb-3' controlId='name'>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type='name' required onChange={(e) =>setName(e.target.value)}/>
+                </Form.Group>
                 <Form.Group className='mb-3' controlId='email'>
                     <Form.Label>Email</Form.Label>
                     <Form.Control type='email' required onChange={(e) =>setEmail(e.target.value)}/>
@@ -62,8 +67,12 @@ export default function SigninScreen() {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type='password' required onChange={(e) => setPassword(e.target.value)}/>
                 </Form.Group>
+                <Form.Group className='mb-3' controlId='confirmPassword'>
+                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Control type='password' required onChange={(e) => setConfirmPassword(e.target.value)}/>
+                </Form.Group>
                 <div className="mb-3">
-                    <Button type='submit'>Sign In</Button>
+                    <Button type='submit'>Sign Up</Button>
                 </div>
                 <div className="mb-3">
                     New Customer?{' '}

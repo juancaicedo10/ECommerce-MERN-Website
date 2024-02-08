@@ -16,7 +16,8 @@ userRouter.post('/signin', expressAsyncHandler(async (req, res) => {
         // Buscar usuario por su correo electrónico en la base de datos
         const user = await User.findOne({ email });
 
-        console.log(user)// Verificar si el usuario existe y si la contraseña es correcta
+        console.log(user)
+        console.log(bcrypt.compareSync(password, user.password))// Verificar si el usuario existe y si la contraseña es correcta
         if (user) {
             if (bcrypt.compareSync(password, user.password)) {
                 res.send({
@@ -27,8 +28,9 @@ userRouter.post('/signin', expressAsyncHandler(async (req, res) => {
                     token: generateToken(user)
                 });
                 return; 
+            } else {
+                res.status(401).send({ message: 'Invalid password' })
             }
-
         } else {
             // Si el usuario no existe o la contraseña es incorrecta, responder con un mensaje de error
             res.status(401).send({ message: 'Invalid email or password' });
@@ -39,6 +41,30 @@ userRouter.post('/signin', expressAsyncHandler(async (req, res) => {
         res.status(500).send({ message: 'An error occurred while processing your request' });
     }
 }));
+
+userRouter.post('/signup', expressAsyncHandler(async (req, res) => {
+    const newUser = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password),
+    });
+
+    console.log(newUser)
+
+    try {
+        const user = await newUser.save();
+        res.send({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            isAdmin: user.isAdmin,
+            token: generateToken(user)
+        });
+    } catch (err) {
+        console.log(err)
+        res.status(500).send({ message: 'Error al registrar usuario' });
+    }
+    }))
 
 
 

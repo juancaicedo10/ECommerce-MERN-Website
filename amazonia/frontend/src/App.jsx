@@ -1,5 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import HomeScreen from './pages/HomeScreen.jsx';
 import ProductScreen from './pages/productScreen.jsx';
 import Navbar from 'react-bootstrap/Navbar';
@@ -11,8 +13,10 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { useContext } from 'react';
 import { Store } from './Store.js';
 import CartScreen from './pages/CartScreen.jsx';
-import Shipping from './pages/Shipping.jsx';
 import signinScreen from './pages/SignInScreen.jsx';
+import SignUpScreen from './pages/SignUpScreen.jsx';
+import ShippingAdressScreen from './pages/ShippingAdressScreen.jsx';
+import PaymentScreen from './pages/PaymentScreen.jsx';
 
 
 function App() {
@@ -26,6 +30,7 @@ function App() {
   return (
     <Router>
     <div className="d-flex flex-column site-container">
+      <ToastContainer position='bottom-center' limit={1} />
       <header>
         <Navbar bg='dark' variant='dark'>
           <Container>
@@ -78,6 +83,9 @@ function App() {
             <Route path='/cart' Component={CartScreen} />
             <Route path='/signin' Component={signinScreen}/>
             <Route path='/' Component={HomeScreen} />
+            <Route path='/shipping' Component={ShippingAdressScreen}/>
+            <Route path='/payment' Component={PaymentScreen}/>
+            <Route path='/signup' Component={SignUpScreen}/>
           </Routes>
         </Container>
       </main>
