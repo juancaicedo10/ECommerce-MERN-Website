@@ -16,7 +16,7 @@ import CartScreen from './pages/CartScreen.jsx';
 import signinScreen from './pages/SignInScreen.jsx';
 import SignUpScreen from './pages/SignUpScreen.jsx';
 import ShippingAdressScreen from './pages/ShippingAdressScreen.jsx';
-import PaymentScreen from './pages/PaymentScreen.jsx';
+import PaymentMethodScreen from './pages/PaymentMethodScreen.jsx';
 
 
 function App() {
@@ -84,7 +84,7 @@ function App() {
             <Route path='/signin' Component={signinScreen}/>
             <Route path='/' Component={HomeScreen} />
             <Route path='/shipping' Component={ShippingAdressScreen}/>
-            <Route path='/payment' Component={PaymentScreen}/>
+            <Route path='/payment' Component={PaymentMethodScreen}/>
             <Route path='/signup' Component={SignUpScreen}/>
           </Routes>
         </Container>

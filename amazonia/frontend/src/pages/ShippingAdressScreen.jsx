@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -19,16 +19,10 @@ function ShippingAdressScreen() {
   const [postalCode , setPostalCode] = useState('');
   const [Country , setCountry] = useState('');
 
-  useEffect(() => {
-    if(!userInfo) {
-      navigate('/signin');
-    }
-  }, [userInfo, navigate])
-
   const submitHandler = (e) => {
     e.preventDefault();
 
-    ctxDispatch({
+     ctxDispatch({
       type: 'SAVE_SHIPPING_ADDRESS',
       payload: {
         fullName,
@@ -48,6 +42,8 @@ function ShippingAdressScreen() {
         Country
       })
     );
+
+    console.log("done")
     navigate('/payment');
   }
   return (
@@ -66,38 +62,43 @@ function ShippingAdressScreen() {
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
           required
+          autoComplete="name"
           />
         </Form.Group>
-        <Form.Group className='mb-3' controlId='fullName'>
+        <Form.Group className='mb-3' controlId='Address'>
           <Form.Label>Address</Form.Label>
           <Form.Control 
           value={Address}
           onChange={(e) => setAddress(e.target.value)}
           required
+          autoComplete="address-line1"
           />
         </Form.Group>
-        <Form.Group className='mb-3' controlId='fullName'>
+        <Form.Group className='mb-3' controlId='City'>
           <Form.Label>City</Form.Label>
           <Form.Control 
           value={City}
           onChange={(e) => setCity(e.target.value)}
           required
+          autoComplete="address-level2"
           />
         </Form.Group>
-        <Form.Group className='mb-3' controlId='fullName'>
+        <Form.Group className='mb-3' controlId='Postal Code'>
           <Form.Label>Postal Code</Form.Label>
           <Form.Control 
           value={postalCode}
           onChange={(e) => setPostalCode(e.target.value)}
           required
+          autoComplete="postal-code"
           />
         </Form.Group>
-        <Form.Group className='mb-3' controlId='fullName'>
+        <Form.Group className='mb-3' controlId='Country'>
           <Form.Label>Country</Form.Label>
           <Form.Control 
           value={Country}
           onChange={(e) => setCountry(e.target.value)}
           required
+          autoComplete="country"
           />
         </Form.Group>
         <div className='mb-3'>
@@ -111,4 +112,4 @@ function ShippingAdressScreen() {
   )
 }
 
-export default ShippingAdressScreen
+export default ShippingAdressScreen;
