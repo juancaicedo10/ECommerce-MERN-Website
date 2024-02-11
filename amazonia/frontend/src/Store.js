@@ -43,6 +43,7 @@ function reducer(state, action) {
             return {...state, cart: { ...state.cart, cartItems } }
         }
         case 'USER_SIGNIN':
+          localStorage.setItem('userInfo', JSON.stringify(action.payload))
           return { ...state, userInfo: action.payload }
         case 'USER_SIGNOUT':
           return {
@@ -69,6 +70,14 @@ function reducer(state, action) {
             paymentMethod: action.payload
           }
         }
+        case 'CART_CLEAR':
+          return {
+            ...state,
+            cart: {
+              ...state.cart,
+              cartItems: []
+            }
+          }
       default:
         return state;
     }
