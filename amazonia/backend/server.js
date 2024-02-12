@@ -48,6 +48,10 @@ app.use((req, res, next) => {
 // Middleware de CORS
 app.use(cors());
 
+app.get('/api/keys/paypal', (req, res) => {
+    res.send(process.env.PAYPAL_CLIENT_ID || 'sb')
+})
+
 // Rutas
 app.use('/api/seed', seedRouter);
 app.use('/api/products', productRouter);
@@ -58,6 +62,7 @@ app.use('/api/orders', orderRouter)
 app.use((err, req, res, next) => {
     res.status(500).send({ message: err.message });
 });
+
 
 // Ruta para obtener productos (para fines de demostración)
 app.get('/api/products', (req, res) => {

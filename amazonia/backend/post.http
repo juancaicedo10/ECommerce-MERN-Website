@@ -1,1 +1,1 @@
-GET http://localhost:5000/api/orders/65c97c05a042c0f6d448433b
+PUT http://localhost:5000/api/orders/65c97c05a042c0f6d448433b/pay
