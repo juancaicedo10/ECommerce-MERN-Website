@@ -18,6 +18,7 @@ import SignUpScreen from './pages/SignUpScreen.jsx';
 import ShippingAdressScreen from './pages/ShippingAdressScreen.jsx';
 import PaymentMethodScreen from './pages/PaymentMethodScreen.jsx';
 import PlaceOrderScreen from './pages/PlaceOrderScreen.jsx';
+import OrderScreen from './pages/OrderScreen.jsx';
 
 
 function App() {
@@ -88,6 +89,7 @@ function App() {
             <Route path='/payment' Component={PaymentMethodScreen}/>
             <Route path='/signup' Component={SignUpScreen}/>
             <Route path='/placeorder' Component={PlaceOrderScreen}/>
+            <Route path='/order/:id' Component={OrderScreen} />
           </Routes>
         </Container>
       </main>

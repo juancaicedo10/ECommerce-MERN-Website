@@ -30,6 +30,7 @@ function ProductScreen() {
   const params = useParams();
   const { slug } = params;
 
+
   const [{ loading, error, product }, dispatch] = useReducer(reducer, {
     product: [],
     loading: true,
