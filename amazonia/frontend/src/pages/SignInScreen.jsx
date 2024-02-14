@@ -30,15 +30,10 @@ export default function SigninScreen() {
                 password
             });
             ctxDispatch({type: 'USER_SIGNIN', payload: data});
-            localStorage.setItem('userinfo', JSON.stringify(data));
+            localStorage.setItem('userInfo', JSON.stringify(data));
             navigate('/shipping');
         } catch (err) {
-            if (err.response && err.response.status === 401) {
-                toast.error(getError(err))
-            } else {
-                console.log(err);
-                alert("An error occurred while processing your request");
-            }
+            toast.error(getError(err))
         }
     }
     

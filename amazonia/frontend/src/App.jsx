@@ -19,6 +19,8 @@ import ShippingAdressScreen from './pages/ShippingAdressScreen.jsx';
 import PaymentMethodScreen from './pages/PaymentMethodScreen.jsx';
 import PlaceOrderScreen from './pages/PlaceOrderScreen.jsx';
 import OrderScreen from './pages/OrderScreen.jsx';
+import OrderHistoryScreen from './pages/OrderHistoryScreen.jsx';
+import ProfileScreen from './pages/ProfileScreen.jsx';
 
 
 function App() {
@@ -34,14 +36,16 @@ function App() {
     <div className="d-flex flex-column site-container">
       <ToastContainer position='bottom-center' limit={1} />
       <header>
-        <Navbar bg='dark' variant='dark'>
+        <Navbar bg='dark' variant='dark' expand='lg'>
           <Container>
             <LinkContainer to='/'>
               <Navbar.Brand>
                 Amazona
               </Navbar.Brand>
             </LinkContainer>
-            <Nav className='me-auto'>
+            <Navbar.Toggle aria-controls='basic-navbar-nav' />
+            <Navbar.Collapse id='basic-navbar-nav'>
+            <Nav className='me-auto w-100 justify-content-end'>
               <Link to='/cart' className='nav-link'>
                 Cart
                 {cart.cartItems.length > 0 && (
@@ -75,6 +79,7 @@ function App() {
                 </Link>
               )}
             </Nav>
+            </Navbar.Collapse>
           </Container>
         </Navbar>
       </header>
@@ -90,6 +95,8 @@ function App() {
             <Route path='/signup' Component={SignUpScreen}/>
             <Route path='/placeorder' Component={PlaceOrderScreen}/>
             <Route path='/order/:id' Component={OrderScreen} />
+            <Route path='/orderhistory' Component={OrderHistoryScreen} />
+            <Route path='/profile' Component={ProfileScreen}/>
           </Routes>
         </Container>
       </main>

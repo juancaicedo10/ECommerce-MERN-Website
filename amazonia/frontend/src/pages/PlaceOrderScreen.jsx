@@ -39,7 +39,7 @@ function PlaceOrderScreen() {
         cart.cartItems.reduce((total, item) => total + item.quantity * item.price, 0)
     );
     
-    cart.shippingPrice = cart.itemsPrice > 100 ? round2(0) : round2(10)
+    cart.shippingPrice = cart.itemsPrice 
     cart.taxPrice = round2(0.15 * cart.itemsPrice);
     cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice
 
@@ -59,6 +59,11 @@ function PlaceOrderScreen() {
                     taxPrice: cart.taxPrice,
                     totalPrice: cart.totalPrice
                 },
+                {
+                    headers: {
+                        authorization: `Bearer ${userInfo.token}`
+                    }
+                }
             )
             ctxDispatch({ type: 'CART_CLEAR' })
             dispatch({ type: 'CREATE_SUCCESS' })

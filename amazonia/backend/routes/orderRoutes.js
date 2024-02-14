@@ -1,12 +1,12 @@
 const express = require('express')
 const Order = require('../models/orderModel.js')
 const expressAsyncHandler = require('express-async-handler')
-const isAuth = require('../utils.js')
+const  { isAuth } = require('../utils.js')
 
 const orderRouter = express.Router();
 
 
-orderRouter.post('/', expressAsyncHandler( async (req, res) => {
+orderRouter.post('/', isAuth, expressAsyncHandler( async (req, res) => {
     try {
     const newOrder = new Order({
         orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id})),
@@ -16,16 +16,28 @@ orderRouter.post('/', expressAsyncHandler( async (req, res) => {
         shippingPrice: req.body.shippingPrice,
         taxPrice: req.body.taxPrice,
         totalPrice: req.body.totalPrice,
-        user: req.user?._id
+        user: req.user._id
 
     });
 
     const order = await newOrder.save();
+    console.log(order.user)
     res.status(201).send({ message: 'New Order Created' , order })
 }catch (err) {
     console.log(err)
 }
 }));
+
+orderRouter.get('/mine', isAuth, expressAsyncHandler(async (req, res) => {
+    try {
+    const orders = await Order.find({ user: req.user._id })
+    res.send(orders)
+    } catch (err) {
+        res.status(500).send({ message: err })
+
+        console.log(err)
+    }
+}))
 
 orderRouter.get('/:id', expressAsyncHandler( async (req, res) => {
     try {

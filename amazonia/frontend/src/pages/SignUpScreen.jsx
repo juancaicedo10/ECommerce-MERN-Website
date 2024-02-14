@@ -35,7 +35,7 @@ export default function SignUpScreen() {
             });
 
             ctxDispatch({ type: 'USER_SIGNIN', payload: data })
-            localStorage.setItem('userinfo', JSON.stringify(data));
+            localStorage.setItem('userInfo', JSON.stringify(data));
             navigate('/');
         }catch (err){
             console.log(err)

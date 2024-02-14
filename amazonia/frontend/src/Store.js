@@ -19,6 +19,8 @@ const initialState = {
         : [],
     }
 }
+
+console.log(initialState.user)
 function reducer(state, action) {
     switch (action.type) {
       case 'CART_ADD_ITEM':
