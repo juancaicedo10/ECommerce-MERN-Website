@@ -4,7 +4,7 @@ import axios from 'axios';
 import logger from 'use-reducer-logger';
 import Row from 'react-bootstrap/Row';
 import Product from '../components/Product';
-import Col from 'react-bootstrap/col';
+import Col from 'react-bootstrap/Col';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
