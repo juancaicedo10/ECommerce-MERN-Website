@@ -31,7 +31,7 @@ export default function SigninScreen() {
             });
             ctxDispatch({type: 'USER_SIGNIN', payload: data});
             localStorage.setItem('userInfo', JSON.stringify(data));
-            navigate('/shipping');
+            navigate('/');
         } catch (err) {
             toast.error(getError(err))
         }

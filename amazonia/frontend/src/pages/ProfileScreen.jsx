@@ -62,6 +62,7 @@ function ProfileScreen() {
             dispatch({ type:'UPDATE_SUCCESS' });
             ctxDispatch({ type:'USER_SIGNIN', payload: data});
             localStorage.setItem('userInfo', JSON.stringify(data));
+            toast.success('User Updated successfully')
              
         } catch (error) {
             dispatch({ type: 'FETCH_FAIL' });

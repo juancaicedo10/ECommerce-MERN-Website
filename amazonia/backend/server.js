@@ -7,7 +7,7 @@ const seedRouter = require('./routes/seedRoutes.js');
 const productRouter = require('./routes/productRoutes.js');
 const userRouter = require('./routes/userRoutes.js');
 const orderRouter = require('./routes/orderRoutes.js');
-
+const path = require('path')
 dotenv.config();
 
 MONGODB_URI = 'mongodb://localhost:27017'
@@ -58,6 +58,13 @@ app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter)
 
+const _dirname = path.resolve();
+
+app.use(express.static(path.join(_dirname, 'frontend/build')))
+
+app.get('*' , (req, res) => {
+   res.sendFile(path.join(_dirname, 'frontend/build/index.html'))
+})
 // Middleware de manejo de errores
 app.use((err, req, res, next) => {
     res.status(500).send({ message: err.message });
